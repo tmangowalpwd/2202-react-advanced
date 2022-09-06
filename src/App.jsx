@@ -6,6 +6,9 @@ import { Routes, Route, Link } from "react-router-dom"
 import { axiosInstance } from "./api"
 import GuestRoute from "./components/GuestRoute"
 import ProtectedRoute from "./components/ProtectedRoute"
+import NotFoundPage from "./pages/404"
+import Dashboard1 from "./pages/admin/Dashboard1"
+import Dashboard2 from "./pages/admin/Dashboard2"
 import HomePage from "./pages/Home"
 import LoginPage from "./pages/Login"
 import ProfilePage from "./pages/Profile"
@@ -39,6 +42,19 @@ const App = () => {
   const logoutBtnHandler = () => {
     localStorage.removeItem("auth_data")
     dispatch(logout())
+  }
+
+  const renderAdminRoutes = () => {
+    if (authSelector.role === "admin") {
+      return (
+        <>
+          <Route path="/admin/dashboard1" element={<Dashboard1 />} />
+          <Route path="/admin/dashboard2" element={<Dashboard2 />} />
+        </>
+      )
+    }
+
+    return null
   }
 
   useEffect(() => {
@@ -103,6 +119,8 @@ const App = () => {
             </GuestRoute>
           }
         />
+        {renderAdminRoutes()}
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </Box>
   )
