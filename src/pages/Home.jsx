@@ -7,6 +7,8 @@ import {
   Stack,
   Textarea,
   useToast,
+  AlertDialog,
+  AlertDialogOverlay,
 } from "@chakra-ui/react"
 import { useFormik } from "formik"
 import { useState, useEffect } from "react"
@@ -16,7 +18,6 @@ import Post from "../components/Post"
 
 const HomePage = () => {
   const [posts, setPosts] = useState([])
-
   const authSelector = useSelector((state) => state.auth)
 
   const toast = useToast()
@@ -74,6 +75,17 @@ const HomePage = () => {
     }
   }
 
+  const deleteBtnHandler = async (id) => {
+    try {
+      await axiosInstance.delete(`/posts/${id}`)
+
+      fetchPosts()
+      toast({ title: "Post deleted", status: "info" })
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
   const renderPosts = () => {
     return posts.map((val) => {
       return (
@@ -82,6 +94,8 @@ const HomePage = () => {
           username={val.user.username}
           body={val.body}
           imageUrl={val.image_url}
+          userId={val.userId}
+          onDelete={() => deleteBtnHandler(val.id)}
         />
       )
     })
@@ -94,29 +108,31 @@ const HomePage = () => {
   return (
     <Container maxW="container.md" py="4">
       <Heading>Home Page</Heading>
-      <Stack mt="4">
-        <Textarea
-          placeholder="Insert your caption here"
-          value={formik.values.body}
-          onChange={inputChangeHandler}
-          name="body"
-        />
-        <HStack>
-          <Input
-            value={formik.values.image_url}
+      {authSelector.id ? (
+        <Stack mt="4">
+          <Textarea
+            placeholder="Insert your caption here"
+            value={formik.values.body}
             onChange={inputChangeHandler}
-            name="image_url"
-            placeholder="Insert image URL"
+            name="body"
           />
-          <Button
-            onClick={formik.handleSubmit}
-            isDisabled={formik.isSubmitting}
-            colorScheme="twitter"
-          >
-            Post
-          </Button>
-        </HStack>
-      </Stack>
+          <HStack>
+            <Input
+              value={formik.values.image_url}
+              onChange={inputChangeHandler}
+              name="image_url"
+              placeholder="Insert image URL"
+            />
+            <Button
+              onClick={formik.handleSubmit}
+              isDisabled={formik.isSubmitting}
+              colorScheme="twitter"
+            >
+              Post
+            </Button>
+          </HStack>
+        </Stack>
+      ) : null}
       <Stack mt="8" spacing="2">
         {renderPosts()}
       </Stack>
