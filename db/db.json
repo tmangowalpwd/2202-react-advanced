@@ -17,28 +17,40 @@
   ],
   "posts": [
     {
-      "body": "seblak geming",
-      "image_url": "https://images.unsplash.com/photo-1662469838214-a97415cd83fe?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80",
+      "body": "Halo dunia",
+      "image_url": "https://images.unsplash.com/photo-1659535836241-9901856696b0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2072&q=80",
+      "userId": 2,
+      "id": 1
+    },
+    {
+      "body": "Kue ulang tahun",
+      "image_url": "https://images.unsplash.com/photo-1662441901214-013b98f0e1bf?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80",
       "userId": 2,
       "id": 2
     },
     {
-      "body": "seblak geming",
-      "image_url": "https://images.unsplash.com/photo-1662469838214-a97415cd83fe?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80",
+      "body": "Santuy di pantuy",
+      "image_url": "https://images.unsplash.com/photo-1662391444498-a2fe45f0812b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=652&q=80",
       "userId": 2,
       "id": 3
     },
     {
-      "body": "seblak geming",
-      "image_url": "https://images.unsplash.com/photo-1662469838214-a97415cd83fe?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80",
+      "body": "Jangan lupa sarapan momzz..",
+      "image_url": "https://images.unsplash.com/photo-1662469853918-c615ffb1e030?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80",
       "userId": 2,
       "id": 4
     },
     {
-      "body": "test",
-      "image_url": "https://images.unsplash.com/photo-1662469838214-a97415cd83fe?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80",
+      "body": "Senang melihat si kecil bermain dengan ayang..",
+      "image_url": "https://images.unsplash.com/photo-1657664073337-31394d7e5c7a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1036&q=80",
       "userId": 2,
       "id": 5
+    },
+    {
+      "body": "Mainan baru.. heheheehe..",
+      "image_url": "https://images.unsplash.com/photo-1659535948742-56813eb6f28c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80",
+      "userId": 2,
+      "id": 6
     }
   ]
 }

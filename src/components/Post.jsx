@@ -66,11 +66,11 @@ const Post = ({ username, body, imageUrl, userId, onDelete }) => {
         />
       </Box>
 
-      <AlertDialog isOpen={isOpen} onClose={onClose}>
+      <AlertDialog isCentered isOpen={isOpen} onClose={onClose}>
         <AlertDialogOverlay>
           <AlertDialogContent>
             <AlertDialogHeader fontSize="lg" fontWeight="bold">
-              Delete Customer
+              Delete Post
             </AlertDialogHeader>
 
             <AlertDialogBody>

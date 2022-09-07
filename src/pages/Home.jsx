@@ -9,6 +9,9 @@ import {
   useToast,
   AlertDialog,
   AlertDialogOverlay,
+  Alert,
+  AlertIcon,
+  AlertTitle,
 } from "@chakra-ui/react"
 import { useFormik } from "formik"
 import { useState, useEffect } from "react"
@@ -18,6 +21,9 @@ import Post from "../components/Post"
 
 const HomePage = () => {
   const [posts, setPosts] = useState([])
+  const [page, setPage] = useState(1)
+  const [totalCount, setTotalCount] = useState(0)
+
   const authSelector = useSelector((state) => state.auth)
 
   const toast = useToast()
@@ -66,10 +72,18 @@ const HomePage = () => {
           _expand: "user",
           _sort: "id",
           _order: "desc",
+          _limit: 2,
+          _page: page,
         },
       })
 
-      setPosts(response.data)
+      setTotalCount(response.headers["x-total-count"])
+
+      if (page === 1) {
+        setPosts(response.data)
+      } else {
+        setPosts([...posts, ...response.data])
+      }
     } catch (err) {
       console.log(err)
     }
@@ -101,12 +115,16 @@ const HomePage = () => {
     })
   }
 
+  const seeMoreBtnHandler = () => {
+    setPage(page + 1)
+  }
+
   useEffect(() => {
     fetchPosts()
-  }, [])
+  }, [page])
 
   return (
-    <Container maxW="container.md" py="4">
+    <Container maxW="container.md" py="4" pb="10">
       <Heading>Home Page</Heading>
       {authSelector.id ? (
         <Stack mt="4">
@@ -135,7 +153,24 @@ const HomePage = () => {
       ) : null}
       <Stack mt="8" spacing="2">
         {renderPosts()}
+
+        {!posts.length ? (
+          <Alert status="warning">
+            <AlertIcon />
+            <AlertTitle>No posts found</AlertTitle>
+          </Alert>
+        ) : null}
       </Stack>
+      {posts.length >= totalCount ? null : (
+        <Button
+          onClick={seeMoreBtnHandler}
+          mt="6"
+          colorScheme="linkedin"
+          width="100%"
+        >
+          See More
+        </Button>
+      )}
     </Container>
   )
 }
