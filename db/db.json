@@ -14,6 +14,37 @@
       "role": "user",
       "id": 2
     }
+  ],
+  "posts": [
+    {
+      "body": "anjay laper",
+      "image_url": "https://images.unsplash.com/photo-1662469838214-a97415cd83fe?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80",
+      "userId": 1,
+      "id": 1
+    },
+    {
+      "body": "seblak geming",
+      "image_url": "https://images.unsplash.com/photo-1662469838214-a97415cd83fe?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80",
+      "userId": 2,
+      "id": 2
+    },
+    {
+      "body": "seblak geming",
+      "image_url": "https://images.unsplash.com/photo-1662469838214-a97415cd83fe?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80",
+      "userId": 2,
+      "id": 3
+    },
+    {
+      "body": "seblak geming",
+      "image_url": "https://images.unsplash.com/photo-1662469838214-a97415cd83fe?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80",
+      "userId": 2,
+      "id": 4
+    },
+    {
+      "body": "test",
+      "image_url": "https://images.unsplash.com/photo-1662469838214-a97415cd83fe?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80",
+      "userId": 2,
+      "id": 5
+    }
   ]
 }
-

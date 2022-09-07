@@ -22,6 +22,7 @@ const App = () => {
   const dispatch = useDispatch()
 
   const keepUserLoggedIn = async () => {
+    setAuthCheck(true)
     try {
       const auth_id = localStorage.getItem("auth_data")
 
@@ -35,8 +36,6 @@ const App = () => {
     } catch (err) {
       console.log(err)
     }
-
-    setAuthCheck(true)
   }
 
   const logoutBtnHandler = () => {
