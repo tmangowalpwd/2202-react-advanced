@@ -45,6 +45,18 @@
       "image_url": "https://images.unsplash.com/photo-1662469838214-a97415cd83fe?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80",
       "userId": 2,
       "id": 5
+    },
+    {
+      "body": "Pamer dulu ges",
+      "image_url": "https://images.unsplash.com/photo-1659535836241-9901856696b0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2072&q=80",
+      "userId": 2,
+      "id": 6
+    },
+    {
+      "body": "test",
+      "image_url": "https://images.unsplash.com/photo-1662469838214-a97415cd83fe?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80",
+      "userId": 2,
+      "id": 7
     }
   ]
 }

@@ -1,20 +1,22 @@
 import {
-  Box,
   Button,
   Container,
   Heading,
   HStack,
   Input,
   Stack,
-  Text,
   Textarea,
   useToast,
 } from "@chakra-ui/react"
 import { useFormik } from "formik"
+import { useState, useEffect } from "react"
 import { useSelector } from "react-redux"
 import { axiosInstance } from "../api"
+import Post from "../components/Post"
 
 const HomePage = () => {
+  const [posts, setPosts] = useState([])
+
   const authSelector = useSelector((state) => state.auth)
 
   const toast = useToast()
@@ -42,6 +44,8 @@ const HomePage = () => {
           title: "Post uploaded",
           status: "success",
         })
+
+        fetchPosts()
       } catch (err) {
         console.log(err)
       }
@@ -53,6 +57,39 @@ const HomePage = () => {
 
     formik.setFieldValue(name, value)
   }
+
+  const fetchPosts = async () => {
+    try {
+      const response = await axiosInstance.get("/posts", {
+        params: {
+          _expand: "user",
+          _sort: "id",
+          _order: "desc",
+        },
+      })
+
+      setPosts(response.data)
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
+  const renderPosts = () => {
+    return posts.map((val) => {
+      return (
+        <Post
+          key={val.id.toString()}
+          username={val.user.username}
+          body={val.body}
+          imageUrl={val.image_url}
+        />
+      )
+    })
+  }
+
+  useEffect(() => {
+    fetchPosts()
+  }, [])
 
   return (
     <Container maxW="container.md" py="4">
@@ -79,6 +116,9 @@ const HomePage = () => {
             Post
           </Button>
         </HStack>
+      </Stack>
+      <Stack mt="8" spacing="2">
+        {renderPosts()}
       </Stack>
     </Container>
   )
