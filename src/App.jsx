@@ -22,19 +22,21 @@ const App = () => {
   const dispatch = useDispatch()
 
   const keepUserLoggedIn = async () => {
-    setAuthCheck(true)
     try {
       const auth_id = localStorage.getItem("auth_data")
 
       if (!auth_id) {
+        setAuthCheck(true)
         return
       }
 
       const response = await axiosInstance.get(`/users/${auth_id}`)
 
       dispatch(login(response.data))
+      setAuthCheck(true)
     } catch (err) {
       console.log(err)
+      setAuthCheck(true)
     }
   }
 
@@ -95,7 +97,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route
-          path="/profile"
+          path="/profile/:username"
           element={
             <ProtectedRoute>
               <ProfilePage />

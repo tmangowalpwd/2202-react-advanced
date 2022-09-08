@@ -77,6 +77,12 @@
       "userId": 2,
       "postId": 6,
       "id": 4
+    },
+    {
+      "text": "hi",
+      "userId": 1,
+      "postId": 6,
+      "id": 5
     }
   ]
 }

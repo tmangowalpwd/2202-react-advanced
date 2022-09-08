@@ -1,10 +1,11 @@
 import { HStack, Text } from "@chakra-ui/react"
+import { Link } from "react-router-dom"
 
 const Comment = ({ username, text }) => {
   return (
     <HStack>
       <Text fontSize="sm" fontWeight="bold" alignSelf="start">
-        {username || "username"}
+        <Link to={`/profile/${username}`}>{username || "username"}</Link>
       </Text>
       <Text fontSize="sm">
         {text ||

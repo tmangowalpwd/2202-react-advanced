@@ -27,6 +27,7 @@ import * as Yup from "yup"
 import { axiosInstance } from "../api"
 import { useState } from "react"
 import { useEffect } from "react"
+import { Link } from "react-router-dom"
 
 const Post = ({ username, body, imageUrl, userId, onDelete, postId }) => {
   const [comments, setComments] = useState([])
@@ -95,7 +96,7 @@ const Post = ({ username, body, imageUrl, userId, onDelete, postId }) => {
       <Box borderColor="gray.300" borderWidth="1px" p="6" borderRadius="8px">
         <HStack justifyContent="space-between">
           <Text fontSize="sm" fontWeight="extrabold">
-            {username || "Username"}
+            <Link to={`/profile/${username}`}>{username || "Username"}</Link>
           </Text>
           {authSelector.id === userId ? (
             <Menu>
