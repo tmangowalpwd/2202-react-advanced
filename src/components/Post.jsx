@@ -10,17 +10,27 @@ import {
   HStack,
   Icon,
   Image,
+  Input,
   Menu,
   MenuButton,
   MenuItem,
   MenuList,
+  Stack,
   Text,
   useDisclosure,
 } from "@chakra-ui/react"
+import { useFormik } from "formik"
 import { BsThreeDots } from "react-icons/bs"
 import { useSelector } from "react-redux"
+import Comment from "./Comment"
+import * as Yup from "yup"
+import { axiosInstance } from "../api"
+import { useState } from "react"
+import { useEffect } from "react"
 
-const Post = ({ username, body, imageUrl, userId, onDelete }) => {
+const Post = ({ username, body, imageUrl, userId, onDelete, postId }) => {
+  const [comments, setComments] = useState([])
+
   const authSelector = useSelector((state) => state.auth)
 
   const { isOpen, onOpen, onClose } = useDisclosure()
@@ -29,6 +39,56 @@ const Post = ({ username, body, imageUrl, userId, onDelete }) => {
     onClose()
     onDelete()
   }
+
+  const fetchComments = async () => {
+    try {
+      const response = await axiosInstance.get("/comments", {
+        params: {
+          postId,
+          _expand: "user",
+        },
+      })
+
+      setComments(response.data)
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
+  const renderComments = () => {
+    return comments.map((val) => {
+      return <Comment username={val.user.username} text={val.text} />
+    })
+  }
+
+  useEffect(() => {
+    fetchComments()
+  }, [])
+
+  const formik = useFormik({
+    initialValues: {
+      comment: "",
+    },
+    validationSchema: Yup.object({
+      comment: Yup.string().required(),
+    }),
+    onSubmit: async (values) => {
+      try {
+        let newComment = {
+          text: values.comment,
+          userId: authSelector.id,
+          postId: postId,
+        }
+
+        await axiosInstance.post("/comments", newComment)
+
+        fetchComments()
+        formik.setFieldValue("comment", "")
+      } catch (err) {
+        console.log(err)
+      }
+    },
+  })
 
   return (
     <>
@@ -64,6 +124,28 @@ const Post = ({ username, body, imageUrl, userId, onDelete }) => {
             "https://images.unsplash.com/photo-1662469838214-a97415cd83fe?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80"
           }
         />
+        <Text fontSize="sm" fontWeight="bold" mt="4">
+          Comments
+        </Text>
+        <Stack mt="2" spacing="0.5">
+          {renderComments()}
+        </Stack>
+        <form onSubmit={formik.handleSubmit}>
+          <HStack mt="3">
+            <Input
+              onChange={({ target }) =>
+                formik.setFieldValue(target.name, target.value)
+              }
+              value={formik.values.comment}
+              size="sm"
+              type="text"
+              name="comment"
+            />
+            <Button type="submit" colorScheme="facebook" size="sm">
+              Post Comment
+            </Button>
+          </HStack>
+        </form>
       </Box>
 
       <AlertDialog isCentered isOpen={isOpen} onClose={onClose}>

@@ -110,6 +110,7 @@ const HomePage = () => {
           imageUrl={val.image_url}
           userId={val.userId}
           onDelete={() => deleteBtnHandler(val.id)}
+          postId={val.id}
         />
       )
     })

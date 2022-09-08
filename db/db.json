@@ -52,5 +52,31 @@
       "userId": 2,
       "id": 6
     }
+  ],
+  "comments": [
+    {
+      "text": "",
+      "userId": 1,
+      "postId": 1,
+      "id": 1
+    },
+    {
+      "text": "test comment",
+      "userId": 2,
+      "postId": 6,
+      "id": 2
+    },
+    {
+      "text": "test lagi",
+      "userId": 2,
+      "postId": 6,
+      "id": 3
+    },
+    {
+      "text": "halooooo",
+      "userId": 2,
+      "postId": 6,
+      "id": 4
+    }
   ]
 }
