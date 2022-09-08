@@ -11,6 +11,7 @@ import Dashboard1 from "./pages/admin/Dashboard1"
 import Dashboard2 from "./pages/admin/Dashboard2"
 import HomePage from "./pages/Home"
 import LoginPage from "./pages/Login"
+import MyProfile from "./pages/MyProfile"
 import ProfilePage from "./pages/Profile"
 import RegisterPage from "./pages/Register"
 import { login, logout } from "./redux/features/authSlice"
@@ -101,7 +102,7 @@ const App = () => {
           path="/me"
           element={
             <ProtectedRoute>
-              <ProfilePage />
+              <MyProfile />
             </ProtectedRoute>
           }
         />

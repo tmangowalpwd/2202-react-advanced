@@ -1,7 +1,18 @@
-import { Avatar, Box, Container, HStack, Stack, Text } from "@chakra-ui/react"
+import {
+  Avatar,
+  Box,
+  Button,
+  Container,
+  FormControl,
+  FormLabel,
+  HStack,
+  Input,
+  Stack,
+  Text,
+} from "@chakra-ui/react"
 import { useSelector } from "react-redux"
 
-const ProfilePage = () => {
+const MyProfile = () => {
   const authSelector = useSelector((state) => state.auth)
 
   return (
@@ -14,7 +25,7 @@ const ProfilePage = () => {
             // src="https://bit.ly/dan-abramov"
           />
 
-          <Stack spacing="0.5">
+          {/* <Stack spacing="0.5">
             <Text fontSize="2xl" fontWeight="semibold">
               {authSelector.username}
             </Text>
@@ -22,12 +33,33 @@ const ProfilePage = () => {
             <Text fontSize="lg" fontWeight="light">
               {authSelector.role}
             </Text>
+          </Stack> */}
+
+          <Stack>
+            <FormControl>
+              <FormLabel>Username</FormLabel>
+              <Input defaultValue={authSelector.username} />
+            </FormControl>
+            <FormControl>
+              <FormLabel>Email</FormLabel>
+              <Input defaultValue={authSelector.email} />
+            </FormControl>
+            <FormControl>
+              <FormLabel>Profile Picture</FormLabel>
+              <Input defaultValue={authSelector.username} />
+            </FormControl>
           </Stack>
         </HStack>
+        <Button mt="8" width="100%" colorScheme="green">
+          Save
+        </Button>
+        {/* <Button mt="8" width="100%">
+          Edit Profile
+        </Button> */}
       </Box>
     </Container>
   )
 }
 
-export default ProfilePage
+export default MyProfile
 
