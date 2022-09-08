@@ -54,6 +54,7 @@ const RegisterPage = () => {
           email: values.email,
           password: values.password,
           role: "user",
+          profile_picture: "",
         }
 
         await axiosInstance.post("/users", newUser)
