@@ -96,8 +96,9 @@ const App = () => {
       </Box>
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/profile/:username" element={<ProfilePage />} />
         <Route
-          path="/profile/:username"
+          path="/me"
           element={
             <ProtectedRoute>
               <ProfilePage />

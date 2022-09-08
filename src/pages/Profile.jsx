@@ -8,10 +8,12 @@ import {
   Text,
 } from "@chakra-ui/react"
 import { useState, useEffect } from "react"
-import { useParams } from "react-router-dom"
+import { useSelector } from "react-redux"
+import { useParams, Navigate } from "react-router-dom"
 import { axiosInstance } from "../api"
 
 const ProfilePage = () => {
+  const authSelector = useSelector((state) => state.auth)
   const [user, setUser] = useState({})
 
   const params = useParams()
@@ -33,6 +35,10 @@ const ProfilePage = () => {
   useEffect(() => {
     fetchUserProfile()
   }, [])
+
+  if (params.username === authSelector.username) {
+    return <Navigate replace to="/me" />
+  }
 
   return (
     <Container maxW="container.md" py="4" pb="10">

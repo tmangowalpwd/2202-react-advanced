@@ -5,7 +5,7 @@ const GuestRoute = ({ children }) => {
   const authSelector = useSelector((state) => state.auth)
 
   if (authSelector.id) {
-    return <Navigate to="/" />
+    return <Navigate replace to="/" />
   }
 
   return children
