@@ -51,6 +51,24 @@
       "image_url": "https://images.unsplash.com/photo-1659535948742-56813eb6f28c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80",
       "userId": 2,
       "id": 6
+    },
+    {
+      "body": "Suasana ibu kota",
+      "image_url": "https://images.unsplash.com/photo-1662377088266-c27ea00ee621?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80",
+      "userId": 1,
+      "id": 7
+    },
+    {
+      "body": "Suasana pengeluaran rupiah, gaji dolar",
+      "image_url": "https://images.unsplash.com/photo-1661956602153-23384936a1d3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80",
+      "userId": 1,
+      "id": 8
+    },
+    {
+      "body": "ngupi bang",
+      "image_url": "https://images.unsplash.com/photo-1661956602868-6ae368943878?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80",
+      "userId": 1,
+      "id": 9
     }
   ],
   "comments": [
