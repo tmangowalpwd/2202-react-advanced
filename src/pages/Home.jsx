@@ -38,7 +38,6 @@ const HomePage = () => {
         let newPost = {
           body: values.body,
           image_url: values.image_url,
-          userId: authSelector.id,
         }
 
         await axiosInstance.post("/posts", newPost)
@@ -69,20 +68,18 @@ const HomePage = () => {
     try {
       const response = await axiosInstance.get("/posts", {
         params: {
-          _expand: "user",
-          _sort: "id",
-          _order: "desc",
           _limit: 2,
           _page: page,
+          _sortDir: "DESC",
         },
       })
 
-      setTotalCount(response.headers["x-total-count"])
+      setTotalCount(response.data.dataCount)
 
       if (page === 1) {
-        setPosts(response.data)
+        setPosts(response.data.data)
       } else {
-        setPosts([...posts, ...response.data])
+        setPosts([...posts, ...response.data.data])
       }
     } catch (err) {
       console.log(err)
@@ -105,10 +102,10 @@ const HomePage = () => {
       return (
         <Post
           key={val.id.toString()}
-          username={val.user.username}
+          username={val.User.username}
           body={val.body}
           imageUrl={val.image_url}
-          userId={val.userId}
+          userId={val.UserId}
           onDelete={() => deleteBtnHandler(val.id)}
           postId={val.id}
         />

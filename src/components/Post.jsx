@@ -129,7 +129,7 @@ const Post = ({ username, body, imageUrl, userId, onDelete, postId }) => {
           Comments
         </Text>
         <Stack mt="2" spacing="0.5">
-          {renderComments()}
+          {/* {renderComments()} */}
         </Stack>
         <form onSubmit={formik.handleSubmit}>
           <HStack mt="3">
