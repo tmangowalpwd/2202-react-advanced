@@ -24,16 +24,17 @@ const App = () => {
 
   const keepUserLoggedIn = async () => {
     try {
-      const auth_id = localStorage.getItem("auth_data")
+      const auth_token = localStorage.getItem("auth_token")
 
-      if (!auth_id) {
+      if (!auth_token) {
         setAuthCheck(true)
         return
       }
 
-      const response = await axiosInstance.get(`/users/${auth_id}`)
+      const response = await axiosInstance.get("/auth/refresh-token")
 
-      dispatch(login(response.data))
+      dispatch(login(response.data.data))
+      localStorage.setItem("auth_token", response.data.token)
       setAuthCheck(true)
     } catch (err) {
       console.log(err)

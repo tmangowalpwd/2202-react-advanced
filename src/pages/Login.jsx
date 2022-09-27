@@ -23,31 +23,35 @@ const LoginPage = () => {
 
   const formik = useFormik({
     initialValues: {
-      username: "",
+      usernameOrEmail: "",
       password: "",
     },
-    onSubmit: async (values) => {
+    onSubmit: async ({ usernameOrEmail, password }) => {
       try {
-        const response = await axiosInstance.get("/users", {
-          params: {
-            username: values.username,
-            password: values.password,
-          },
+        const response = await axiosInstance.post("/auth/login", {
+          usernameOrEmail,
+          password,
         })
 
-        if (!response.data.length) {
-          toast({ title: "Credentials don't match", status: "error" })
-          return
-        }
-
-        localStorage.setItem("auth_data", response.data[0].id)
-        dispatch(login(response.data[0]))
+        localStorage.setItem("auth_token", response.data.token)
+        dispatch(
+          login({
+            username: response.data.data.username,
+            email: response.data.data.email,
+            id: response.data.data.id,
+          })
+        )
       } catch (err) {
         console.log(err)
+        toast({
+          status: "error",
+          title: "Login failed",
+          description: err.response.data.message,
+        })
       }
     },
     validationSchema: Yup.object({
-      username: Yup.string().required().min(3),
+      usernameOrEmail: Yup.string().required().min(3),
       password: Yup.string().required(),
     }),
     validateOnChange: false,
@@ -68,14 +72,16 @@ const LoginPage = () => {
 
           <form onSubmit={formik.handleSubmit}>
             <Stack>
-              <FormControl isInvalid={formik.errors.username}>
-                <FormLabel>Username</FormLabel>
+              <FormControl isInvalid={formik.errors.usernameOrEmail}>
+                <FormLabel>Username or Email</FormLabel>
                 <Input
-                  value={formik.values.username}
-                  name="username"
+                  value={formik.values.usernameOrEmail}
+                  name="usernameOrEmail"
                   onChange={formChangeHandler}
                 />
-                <FormErrorMessage>{formik.errors.username}</FormErrorMessage>
+                <FormErrorMessage>
+                  {formik.errors.usernameOrEmail}
+                </FormErrorMessage>
               </FormControl>
               <FormControl isInvalid={formik.errors.password}>
                 <FormLabel>Password</FormLabel>
