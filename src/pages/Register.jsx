@@ -23,47 +23,25 @@ const RegisterPage = () => {
       email: "",
       password: "",
     },
-    onSubmit: async (values) => {
+    onSubmit: async ({ username, email, password }) => {
       try {
-        // 1. Email unique
-        // 2. Username unique
-        const emailResponse = await axiosInstance.get("/users", {
-          params: {
-            email: values.email,
-          },
+        const response = await axiosInstance.post("/auth/register", {
+          username,
+          email,
+          password,
         })
-
-        if (emailResponse.data.length) {
-          toast({ title: "Email has already been used", status: "error" })
-          return
-        }
-
-        const usernameResponse = await axiosInstance.get("/users", {
-          params: {
-            username: values.username,
-          },
-        })
-
-        if (usernameResponse.data.length) {
-          toast({ title: "Username has already been used", status: "error" })
-          return
-        }
-
-        let newUser = {
-          username: values.username,
-          email: values.email,
-          password: values.password,
-          role: "user",
-          profile_picture: "",
-        }
-
-        await axiosInstance.post("/users", newUser)
 
         toast({
           title: "Registration successful",
+          description: response.data.message,
           status: "success",
         })
       } catch (err) {
+        toast({
+          title: "Registration failed",
+          description: err.response.data.message,
+          status: "error",
+        })
         console.log(err)
       }
     },
