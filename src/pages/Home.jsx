@@ -14,7 +14,7 @@ import {
   AlertTitle,
 } from "@chakra-ui/react"
 import { useFormik } from "formik"
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import { useSelector } from "react-redux"
 import { axiosInstance } from "../api"
 import Post from "../components/Post"
@@ -24,6 +24,8 @@ const HomePage = () => {
   const [page, setPage] = useState(1)
   const [totalCount, setTotalCount] = useState(0)
 
+  const inputFileRef = useRef(null)
+
   const authSelector = useSelector((state) => state.auth)
 
   const toast = useToast()
@@ -31,19 +33,19 @@ const HomePage = () => {
   const formik = useFormik({
     initialValues: {
       body: "",
-      image_url: "",
+      post_image: null,
     },
     onSubmit: async (values) => {
       try {
-        let newPost = {
-          body: values.body,
-          image_url: values.image_url,
-        }
+        let newPost = new FormData()
+
+        newPost.append("body", values.body)
+        newPost.append("post_image", values.post_image)
 
         await axiosInstance.post("/posts", newPost)
 
         formik.setFieldValue("body", "")
-        formik.setFieldValue("image_url", "")
+        formik.setFieldValue("post_image", null)
 
         toast({
           position: "top-right",
@@ -134,11 +136,23 @@ const HomePage = () => {
           />
           <HStack>
             <Input
-              value={formik.values.image_url}
-              onChange={inputChangeHandler}
-              name="image_url"
-              placeholder="Insert image URL"
+              ref={inputFileRef}
+              display="none"
+              name="post_image"
+              type="file"
+              accept="image/*"
+              onChange={(event) => {
+                formik.setFieldValue("post_image", event.target.files[0])
+              }}
             />
+            <Button
+              onClick={() => {
+                inputFileRef.current.click()
+              }}
+              width="100%"
+            >
+              {formik?.values?.post_image?.name || "Upload Image"}
+            </Button>
             <Button
               onClick={formik.handleSubmit}
               isDisabled={formik.isSubmitting}

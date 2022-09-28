@@ -43,7 +43,7 @@ const App = () => {
   }
 
   const logoutBtnHandler = () => {
-    localStorage.removeItem("auth_data")
+    localStorage.removeItem("auth_token")
     dispatch(logout())
   }
 
