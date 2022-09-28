@@ -74,52 +74,36 @@ const MyProfile = () => {
     initialValues: {
       username: "",
       email: "",
-      profile_picture: "",
+      profile_picture: null,
     },
-    onSubmit: async (values) => {
+    onSubmit: async ({ username, email, profile_picture }) => {
       try {
-        const emailResponse = await axiosInstance.get("/users", {
-          params: {
-            email: values.email,
-          },
-        })
+        const userData = new FormData()
 
-        if (emailResponse.data.length && values.email !== authSelector.email) {
-          toast({ title: "Email has already been used", status: "error" })
-          return
+        if (username && username !== authSelector.username) {
+          userData.append("username", username)
         }
 
-        const usernameResponse = await axiosInstance.get("/users", {
-          params: {
-            username: values.username,
-          },
-        })
-
-        if (
-          usernameResponse.data.length &&
-          values.username !== authSelector.username
-        ) {
-          toast({ title: "Username has already been used", status: "error" })
-          return
+        if (email && email !== authSelector.email) {
+          userData.append("email", email)
         }
 
-        let newUser = {
-          username: values.username,
-          email: values.email,
-          profile_picture: values.profile_picture,
+        if (profile_picture) {
+          userData.append("profile_picture", profile_picture)
         }
 
-        await axiosInstance.patch(`/users/${authSelector.id}`, newUser)
+        const userResponse = await axiosInstance.patch("/auth/me", userData)
 
-        const userResponse = await axiosInstance.get(
-          `/users/${authSelector.id}`
-        )
-
-        dispatch(login(userResponse.data))
+        dispatch(login(userResponse.data.data))
         setEditMode(false)
         toast({ title: "Profile edited" })
       } catch (err) {
         console.log(err)
+        toast({
+          title: "Failed edit",
+          status: "error",
+          description: err.response.data.message,
+        })
       }
     },
   })
@@ -141,9 +125,8 @@ const MyProfile = () => {
           <Avatar
             size="2xl"
             name={authSelector.username}
-            src={authSelector.profile_picture}
+            src={authSelector.profile_picture_url}
           />
-
           {editMode ? (
             <Stack>
               <FormControl>
@@ -165,9 +148,15 @@ const MyProfile = () => {
               <FormControl>
                 <FormLabel>Profile Picture</FormLabel>
                 <Input
-                  onChange={formChangeHandler}
+                  accept="image/*"
+                  type="file"
+                  onChange={(event) =>
+                    formik.setFieldValue(
+                      "profile_picture",
+                      event.target.files[0]
+                    )
+                  }
                   name="profile_picture"
-                  defaultValue={authSelector.profile_picture}
                 />
               </FormControl>
             </Stack>
@@ -200,7 +189,7 @@ const MyProfile = () => {
         )}
       </Box>
 
-      <Stack>{renderPosts()}</Stack>
+      {/* <Stack>{renderPosts()}</Stack> */}
     </Container>
   )
 }
